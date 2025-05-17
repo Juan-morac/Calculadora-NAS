@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Evaluación NAS</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1, h2 { color: #2c3e50; }
+        label { display: block; margin: 5px 0; }
+        input, select { padding: 5px; margin-bottom: 10px; }
+        .seccion { margin-top: 30px; }
+        .grupo { margin-left: 20px; padding: 10px; border-left: 4px solid #ccc; margin-bottom: 20px; background: #f9f9f9; }
+        .subtitulo { font-weight: bold; margin-top: 10px; color: #34495e; }
+        .descripcion { font-size: 13px; color: #555; margin-bottom: 5px; }
+        .resultado { font-size: 18px; font-weight: bold; margin-top: 20px; color: #2c3e50; }
+    </style>
+</head>
+<body>
+    <h1>Formulario de Evaluación NAS</h1>
+    <div class="seccion">
+        <label>Nombre del paciente</label><input type="text">
+        <label>RUT</label><input type="text">
+        <label>Fecha</label><input type="date">
+        <label>Nombre del evaluador</label><input type="text">
+        <label>Número de cama</label>
+        <select>
+            <option value="">Seleccione una cama</option>
+            <option value="A1">A1</option><option value="A2">A2</option><option value="A3">A3</option><option value="A4">A4</option><option value="A5">A5</option><option value="A6">A6</option><option value="A7">A7</option><option value="A8">A8</option><option value="A9">A9</option><option value="A10">A10</option><option value="A11">A11</option><option value="A12">A12</option><option value="B13">B13</option><option value="B14">B14</option><option value="B15">B15</option><option value="B16">B16</option><option value="B17">B17</option><option value="B18">B18</option><option value="B19">B19</option><option value="B20">B20</option><option value="B21">B21</option><option value="B22">B22</option><option value="B23">B23</option><option value="B24">B24</option><option value="C25">C25</option><option value="C26">C26</option><option value="C27">C27</option><option value="C28">C28</option><option value="C29">C29</option><option value="C30">C30</option><option value="C31">C31</option><option value="C32">C32</option><option value="C33">C33</option><option value="C34">C34</option><option value="C35">C35</option><option value="C36">C36</option><option value="D37">D37</option><option value="D38">D38</option><option value="D39">D39</option><option value="D40">D40</option><option value="D41">D41</option><option value="D42">D42</option><option value="D43">D43</option><option value="D44">D44</option><option value="D45">D45</option><option value="D46">D46</option><option value="D47">D47</option><option value="D48">D48</option><option value="E49">E49</option><option value="E50">E50</option><option value="E51">E51</option><option value="E52">E52</option><option value="E53">E53</option><option value="E54">E54</option>
+        </select>
+    </div>
+
+    <form id="nasForm" class="seccion">
+
+        <h2>Actividades Básicas</h2>
+
+        <div class="grupo" onchange="calcularNAS()">
+            <div class="subtitulo">1. Control de signos vitales</div>
+            <div class="descripcion">Monitoreo de parámetros y balance hídrico.</div>
+            <label><input type="radio" name="1" value="4.5"> Control horario básico (signos vitales cada horario)</label>
+            <label><input type="radio" name="1" value="12.1"> Observación continua 2+ h (incluye VMNI, decúbito prono, etc.)</label>
+            <label><input type="radio" name="1" value="19.6"> Observación activa 4+ h (mayor gravedad o riesgo)</label>
+        </div>
+
+        <div class="grupo" onchange="calcularNAS()">
+            <div class="subtitulo">2-3-5. Actividades únicas</div>
+            <div class="descripcion">Actividades que se registran por su sola ejecución.</div>
+            <label><input type="checkbox" value="4.3"> Exámenes de laboratorio: solicitud, seguimiento y registro</label>
+            <label><input type="checkbox" value="5.6"> Medicamentos: preparación y administración (no vasoactivos)</label>
+            <label><input type="checkbox" value="1.8"> Drenajes: cuidado de drenajes torácicos, pleurales, etc.</label>
+        </div>
+
+        <div class="grupo" onchange="calcularNAS()">
+            <div class="subtitulo">4. Procedimientos de higiene</div>
+            <div class="descripcion">Desde higiene básica hasta procedimientos complejos de aislamiento.</div>
+            <label><input type="radio" name="4" value="4.1"> Higiene básica (baño, muda, curaciones simples)</label>
+            <label><input type="radio" name="4" value="16.5"> Higiene durante 2+ h (manejo prolongado)</label>
+            <label><input type="radio" name="4" value="20"> Higiene durante 4+ h (curaciones complejas o múltiples)</label>
+        </div>
+
+        <div class="grupo" onchange="calcularNAS()">
+            <div class="subtitulo">6. Movilización</div>
+            <div class="descripcion">Movilizar o posicionar pacientes críticamente enfermos.</div>
+            <label><input type="radio" name="6" value="5.5"> Hasta 3 veces en 24 h (mínimo requerido)</label>
+            <label><input type="radio" name="6" value="12.4"> Más de 3 veces o con ayuda de 2 enfermeras</label>
+            <label><input type="radio" name="6" value="17"> 3+ enfermeras (pacientes con pronación o tracción)</label>
+        </div>
+
+        <div class="grupo" onchange="calcularNAS()">
+            <div class="subtitulo">7. Apoyo familiar/paciente</div>
+            <div class="descripcion">Tiempo invertido en orientación, contención emocional y duelo.</div>
+            <label><input type="radio" name="7" value="4"> Dedicación de al menos 1 h al acompañamiento</label>
+            <label><input type="radio" name="7" value="32"> Apoyo intensivo 3+ h o situaciones críticas (duelo)</label>
+        </div>
+
+        <div class="grupo" onchange="calcularNAS()">
+            <div class="subtitulo">8. Gestión y administración</div>
+            <div class="descripcion">Registro, coordinación, trámites y documentación administrativa.</div>
+            <label><input type="radio" name="8" value="4.2"> Actividades rutinarias (notas, exámenes, rondas)</label>
+            <label><input type="radio" name="8" value="23.2"> Gestión 2+ h (admisión, alta, coordinación externa)</label>
+            <label><input type="radio" name="8" value="30"> Gestión compleja 4+ h (donación, fallecimiento)</label>
+        </div>
+
+        <h2>Soporte Ventilatorio</h2>
+        <div class="grupo" onchange="calcularNAS()">
+            <label><input type="checkbox" value="1.4"> Ventilación u oxígeno por cualquier método</label>
+            <label><input type="checkbox" value="1.8"> Manejo de tubo endotraqueal o traqueostomía</label>
+            <label><input type="checkbox" value="4.4"> Fisioterapia, aspiración o terapia inhalatoria</label>
+        </div>
+
+        <h2>Soporte Cardiovascular</h2>
+        <div class="grupo" onchange="calcularNAS()">
+            <label><input type="checkbox" value="1.2"> Fármacos vasoactivos (ej. noradrenalina)</label>
+            <label><input type="checkbox" value="2.5"> Reposición líquida >3 L/día</label>
+            <label><input type="checkbox" value="1.7"> Catéter pulmonar / control del gasto cardíaco</label>
+            <label><input type="checkbox" value="7.1"> RCP realizado en últimas 24 h</label>
+        </div>
+
+        <h2>Soporte Renal</h2>
+        <div class="grupo" onchange="calcularNAS()">
+            <label><input type="checkbox" value="7.7"> Diálisis o hemofiltración continua</label>
+            <label><input type="checkbox" value="7"> Sonda urinaria con medición estricta</label>
+        </div>
+
+        <h2>Soporte Neurológico</h2>
+        <div class="grupo" onchange="calcularNAS()">
+            <label><input type="checkbox" value="1.6"> Monitorización invasiva de presión intracraneal</label>
+        </div>
+
+        <h2>Soporte Metabólico</h2>
+        <div class="grupo" onchange="calcularNAS()">
+            <label><input type="checkbox" value="1.3"> Manejo de acidosis/alcalosis</label>
+            <label><input type="checkbox" value="2.9"> Nutrición parenteral total central</label>
+            <label><input type="checkbox" value="1.3"> Nutrición enteral (sonda gástrica, etc.)</label>
+        </div>
+
+        <h2>Intervenciones Específicas</h2>
+        <div class="grupo" onchange="calcularNAS()">
+            <label><input type="checkbox" value="2.8"> Intubación, marcapasos, cardioversión, etc. en UCI</label>
+            <label><input type="checkbox" value="1.9"> Cirugías o diagnósticos realizados fuera de la UCI</label>
+        </div>
+    </form>
+
+    <div id="resultado" class="resultado">Puntaje total NAS: 0 (Sin calcular)</div>
+
+    <script>
+        function calcularNAS() {
+            const inputs = document.querySelectorAll('input:checked');
+            let total = 0;
+            inputs.forEach(el => total += parseFloat(el.value));
+            let carga = "";
+            if (total < 50) carga = "Carga ligera";
+            else if (total < 70) carga = "Carga moderada";
+            else if (total < 100) carga = "Alta carga";
+            else carga = "Carga extrema";
+            document.getElementById("resultado").innerText = 
+                "Puntaje total NAS: " + total.toFixed(1) + " (" + carga + ")";
+        }
+    </script>
+</body>
+</html>
